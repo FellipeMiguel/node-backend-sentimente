@@ -8,7 +8,6 @@ const router = express.Router();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-// Rota de Registro (Register)
 router.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -17,16 +16,13 @@ router.post("/register", async (req, res) => {
   }
 
   try {
-    // Verificar se o usuário já existe
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ error: "Email already registered." });
     }
 
-    // Criptografar a senha
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Criar um novo usuário
     const newUser = new User({
       name,
       email,
@@ -57,18 +53,12 @@ router.post("/login", async (req, res) => {
       return res.status(404).json({ error: "Invalid email or password." });
     }
 
-    // Comparar senhas
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(401).json({ error: "Invalid email or password." });
     }
 
-    // Gerar token JWT
-    const token = jwt.sign(
-      { id: user._id }, // Payload (ID do usuário)
-      JWT_SECRET, // Segredo
-      { expiresIn: "1d" } // Tempo de expiração (1 dia)
-    );
+    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "1d" });
 
     res.status(200).json({ message: "Login successful!", token });
   } catch (error) {
@@ -97,7 +87,7 @@ router.get("/dashboard", authMiddleware, async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
-        classes: user.classes, // Turmas do professor
+        classes: user.classes,
       },
     });
   } catch (error) {

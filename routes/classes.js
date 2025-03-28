@@ -55,4 +55,31 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const teacherId = req.userId;
+    const classes = await ClassModel.find({ teacher: teacherId }).populate(
+      "students"
+    );
+    res.status(200).json(classes);
+  } catch (error) {
+    console.error("Error fetching classes:", error);
+    res.status(500).json({ error: "Error fetching classes." });
+  }
+});
+
+router.get("/:classId", async (req, res) => {
+  try {
+    const { classId } = req.params;
+    const classData = await ClassModel.findById(classId).populate("students");
+    if (!classData) {
+      return res.status(404).json({ error: "Class not found." });
+    }
+    res.status(200).json(classData);
+  } catch (error) {
+    console.error("Error fetching class:", error);
+    res.status(500).json({ error: "Error fetching class." });
+  }
+});
+
 module.exports = router;

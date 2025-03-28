@@ -8,6 +8,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/auth");
 const classRoutes = require("./routes/classes");
 const emotionRoutes = require("./routes/emotions");
+const dateRoutes = require("./routes/dates");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -34,6 +35,7 @@ app.use(
 app.use("/api/auth", authRoutes);
 app.use("/api/classes", classRoutes);
 app.use("/api/emotions", emotionRoutes);
+app.use("/api/dates", dateRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI)
