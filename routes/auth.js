@@ -1,3 +1,50 @@
+/**
+ * @fileoverview Routes for authentication and user management.
+ * @module routes/auth
+ */
+
+/**
+ * @route POST /register
+ * @description Register a new user.
+ * @access Public
+ * @param {string} req.body.name - The name of the user.
+ * @param {string} req.body.email - The email of the user.
+ * @param {string} req.body.password - The password of the user.
+ * @returns {Object} 201 - User registered successfully.
+ * @returns {Object} 400 - Missing fields or email already registered.
+ * @returns {Object} 500 - Error during registration.
+ */
+
+/**
+ * @route POST /login
+ * @description Authenticate a user and return a JWT token.
+ * @access Public
+ * @param {string} req.body.email - The email of the user.
+ * @param {string} req.body.password - The password of the user.
+ * @returns {Object} 200 - Login successful with token.
+ * @returns {Object} 400 - Missing email or password.
+ * @returns {Object} 404 - Invalid email or password.
+ * @returns {Object} 401 - Invalid email or password.
+ * @returns {Object} 500 - Error during login.
+ */
+
+/**
+ * @route POST /logout
+ * @description Logout a user (handled on the frontend by removing the token).
+ * @access Public
+ * @returns {Object} 200 - Logged out successfully.
+ */
+
+/**
+ * @route GET /dashboard
+ * @description Retrieve dashboard data for authenticated users.
+ * @access Private
+ * @middleware authMiddleware - Middleware to verify authentication.
+ * @returns {Object} 200 - Dashboard data retrieved successfully.
+ * @returns {Object} 404 - User not found.
+ * @returns {Object} 500 - Error fetching dashboard data.
+ */
+
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");

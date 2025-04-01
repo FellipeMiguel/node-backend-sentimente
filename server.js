@@ -1,3 +1,33 @@
+/**
+ * This script sets up and starts an Express server for a backend application.
+ * It includes middleware for handling CORS, JSON parsing, URL-encoded data,
+ * and session management. It also connects to a MongoDB database using Mongoose
+ * and defines routes for authentication, classes, emotions, and dates.
+ *
+ * Environment Variables:
+ * - PORT: The port on which the server will run (default: 5000).
+ * - SESSION_SECRET: The secret key used for session management.
+ * - MONGO_URI: The connection string for the MongoDB database.
+ *
+ * Middleware:
+ * - CORS: Configured to allow requests from "http://localhost:5173" with credentials.
+ * - express.json(): Parses incoming JSON requests.
+ * - express.urlencoded(): Parses URL-encoded data.
+ * - express-session: Manages user sessions with a secret and cookie configuration.
+ *
+ * Routes:
+ * - /api/auth: Handles authentication-related operations.
+ * - /api/classes: Handles operations related to classes.
+ * - /api/emotions: Handles operations related to emotions.
+ * - /api/dates: Handles operations related to dates.
+ *
+ * Database:
+ * - Connects to MongoDB using the URI provided in the environment variables.
+ *
+ * Server:
+ * - Starts the server on the specified PORT and logs the URL.
+ */
+
 require("dotenv").config();
 
 const express = require("express");
