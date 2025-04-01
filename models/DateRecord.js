@@ -1,14 +1,18 @@
-// models/DateEntry.js
+// models/DateRecord.js
 const mongoose = require("mongoose");
 
-const DateEntrySchema = new mongoose.Schema({
+const DateRecordSchema = new mongoose.Schema({
   teacher: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
+  classId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Class",
+    required: true,
+  },
   date: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model("DateEntry", DateEntrySchema);
+module.exports = mongoose.model("DateRecord", DateRecordSchema);
