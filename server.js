@@ -40,12 +40,18 @@ const classRoutes = require("./routes/classes");
 const emotionRoutes = require("./routes/emotions");
 const dateRoutes = require("./routes/dates");
 
+const allowedOrigins = [
+  "https://sentimente.vercel.app/",
+  "http://localhost:5173",
+];
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
