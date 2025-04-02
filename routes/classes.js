@@ -1,3 +1,38 @@
+/**
+ * @fileoverview This file defines the routes for managing classes in the application.
+ * It includes endpoints for creating, retrieving, and fetching details of classes.
+ * The routes are protected by an authentication middleware.
+ */
+
+/**
+ * POST / - Create a new class.
+ * @route POST /
+ * @access Protected
+ * @param {string} req.body.name - The name of the class.
+ * @param {Array<Object>} req.body.students - An array of student objects with a `name` property.
+ * @returns {Object} 201 - A success message and the created class object.
+ * @returns {Object} 400 - An error message if the request body is invalid.
+ * @returns {Object} 500 - An error message if there is a server error.
+ */
+
+/**
+ * GET / - Retrieve all classes for the authenticated teacher.
+ * @route GET /
+ * @access Protected
+ * @returns {Array<Object>} 200 - An array of class objects with populated student data.
+ * @returns {Object} 500 - An error message if there is a server error.
+ */
+
+/**
+ * GET /:classId - Retrieve details of a specific class by its ID.
+ * @route GET /:classId
+ * @access Protected
+ * @param {string} req.params.classId - The ID of the class to retrieve.
+ * @returns {Object} 200 - The class object with populated student data.
+ * @returns {Object} 404 - An error message if the class is not found.
+ * @returns {Object} 500 - An error message if there is a server error.
+ */
+
 const express = require("express");
 const ClassModel = require("../models/Class");
 const Student = require("../models/Student");

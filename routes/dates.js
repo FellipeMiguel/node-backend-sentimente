@@ -1,3 +1,45 @@
+/**
+ * @fileoverview Routes for managing dates associated with a teacher and class.
+ * Provides endpoints to fetch, add, and delete date records.
+ */
+
+/**
+ * GET /dates/
+ * Fetches all date records for the authenticated teacher and a specific class.
+ *
+ * @name GetDates
+ * @route {GET} /
+ * @queryparam {string} classId - The ID of the class to fetch dates for.
+ * @returns {Object[]} 200 - An array of date records.
+ * @returns {Object} 400 - Error message if classId is missing.
+ * @returns {Object} 500 - Error message if an internal server error occurs.
+ */
+
+/**
+ * POST /dates/
+ * Adds a new date record for the authenticated teacher and a specific class.
+ *
+ * @name AddDate
+ * @route {POST} /
+ * @bodyparam {string} date - The date to be added.
+ * @bodyparam {string} classId - The ID of the class associated with the date.
+ * @returns {Object} 201 - Success message and the newly created date record.
+ * @returns {Object} 400 - Error message if date or classId is missing.
+ * @returns {Object} 500 - Error message if an internal server error occurs.
+ */
+
+/**
+ * DELETE /dates/:id
+ * Deletes a specific date record by its ID.
+ *
+ * @name DeleteDate
+ * @route {DELETE} /:id
+ * @routeparam {string} id - The ID of the date record to delete.
+ * @returns {Object} 200 - Success message if the date record is deleted.
+ * @returns {Object} 404 - Error message if the date record is not found.
+ * @returns {Object} 500 - Error message if an internal server error occurs.
+ */
+
 const express = require("express");
 const authMiddleware = require("../middlewares/authMiddleware");
 const DateRecord = require("../models/DateRecord");

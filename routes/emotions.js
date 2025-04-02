@@ -1,3 +1,39 @@
+/**
+ * @fileoverview Routes for handling emotions-related operations.
+ * @module routes/emotions
+ */
+
+/**
+ * POST /:classId/student/:studentId
+ * Records a new emotion for a specific student in a class.
+ *
+ * @name POST/:classId/student/:studentId
+ * @function
+ * @memberof module:routes/emotions
+ * @param {string} req.params.classId - The ID of the class.
+ * @param {string} req.params.studentId - The ID of the student.
+ * @param {Object} req.body - The request body.
+ * @param {string} req.body.emotion - The emotion to record.
+ * @param {string} req.body.date - The date of the emotion.
+ * @returns {Object} 201 - Emotion recorded successfully.
+ * @returns {Object} 500 - Error recording emotion.
+ */
+
+/**
+ * GET /
+ * Fetches the count of emotions for a specific class on a specific date.
+ *
+ * @name GET/
+ * @function
+ * @memberof module:routes/emotions
+ * @param {Object} req.query - The query parameters.
+ * @param {string} req.query.date - The date to filter emotions.
+ * @param {string} req.query.classId - The ID of the class to filter emotions.
+ * @returns {Object} 200 - An object containing the count of votes for each emotion.
+ * @returns {Object} 400 - Error if date or classId is missing.
+ * @returns {Object} 500 - Error fetching emotions.
+ */
+
 const express = require("express");
 const Emotion = require("../models/Emotion");
 const Student = require("../models/Student");
