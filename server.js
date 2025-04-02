@@ -41,7 +41,7 @@ const emotionRoutes = require("./routes/emotions");
 const dateRoutes = require("./routes/dates");
 
 const allowedOrigins = [
-  "https://sentimente.vercel.app/",
+  "https://sentimente.vercel.app",
   "http://localhost:5173",
 ];
 
@@ -50,8 +50,15 @@ const PORT = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: allowedOrigins,
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg = `A origem: ${origin} não está autorizada!`;
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
