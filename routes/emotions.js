@@ -92,4 +92,34 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/student/:studentId", async (req, res) => {
+  try {
+    const { studentId } = req.params;
+    const { classId } = req.query;
+
+    if (!classId) {
+      return res
+        .status(400)
+        .json({ error: "Query parameter classId is required." });
+    }
+
+    // Busca todos os registros daquele aluno na turma, ordenando por data
+    const records = await Emotion.find({
+      student: studentId,
+      class: classId,
+    }).sort({ date: 1 });
+
+    // Responde com array de objetos { date, emotion }
+    const history = records.map((r) => ({
+      date: r.date.toISOString(),
+      emotion: r.emotion,
+    }));
+
+    res.status(200).json(history);
+  } catch (error) {
+    console.error("Error fetching student history:", error);
+    res.status(500).json({ error: "Error fetching student history." });
+  }
+});
+
 module.exports = router;
